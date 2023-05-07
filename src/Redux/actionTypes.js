@@ -1,0 +1,8 @@
+export const LOADING="loading"
+export const LOGIN="login"
+export const REGISTER="register"
+export const ERROR="error"
+export const GET="get"
+export const EDIT="edit"
+export const ADD="add"
+export const DEL="del"
