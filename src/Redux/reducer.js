@@ -1,11 +1,11 @@
-import { LOADING, LOGIN,REGISTER,ERROR,GET,EDIT,ADD,DEL } from "./actionTypes"
+import { LOADING, LOGIN,REGISTER,ERROR,GET,EDIT,ADD,DEL,LOGOUT } from "./actionTypes"
 let token=localStorage.getItem("token") || ""
 const init={
     loading:false,
     error:false,
     data:[],
     token,
-    isAuth:token?true:false
+    isAuth:token!=""?true:false
 }
 export const reducer=(state=init,action)=>{
     const {payload,type}=action
@@ -28,7 +28,11 @@ export const reducer=(state=init,action)=>{
         }
         case ADD:{
             let data=[...state.data,payload]
-            return {...state,data}
+            return {...state,data,loading:false}
+        }
+        case LOGOUT:{
+            localStorage.clear()    
+            return init
         }
         case EDIT:{
             let data=state.data.map((el,i)=>{

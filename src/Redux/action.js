@@ -1,9 +1,9 @@
-import {ERROR, LOADING, LOGIN, REGISTER,GET, EDIT,ADD,DEL} from "./actionTypes"
+import {ERROR, LOADING, LOGIN, REGISTER,GET, EDIT,ADD,DEL,LOGOUT} from "./actionTypes"
 import axios from "axios";
 export const login=(obj,nav)=>async(dispatch)=>{
     dispatch({type:LOADING});
     try {
-        let data=await axios.post("http://localhost:5000/users/login",obj)
+        let data=await axios.post("https://red-awful-coral.cyclic.app/users/login",obj)
         data=data.data;
         dispatch({type:LOGIN,payload:data.token})
         console.log(data)
@@ -13,10 +13,14 @@ export const login=(obj,nav)=>async(dispatch)=>{
         alert("Wrong Credentials") 
     }
 }
+export const logout=(n)=>async(dispatch)=>{
+    dispatch({type:LOGOUT});
+    n()
+}
 export const register=(obj,s)=>async(dispatch)=>{
     dispatch({type:LOADING});
     try {
-        let data=await axios.post("http://localhost:5000/users/register",obj)
+        let data=await axios.post("https://red-awful-coral.cyclic.app/users/register",obj)
         data=data.data;
         dispatch({type:REGISTER,payload:data.token})
         s()
@@ -28,7 +32,7 @@ export const register=(obj,s)=>async(dispatch)=>{
 export const get=(token)=>async(dispatch)=>{
     dispatch({type:LOADING})
     try {
-        let data=await axios.get("http://localhost:5000/contact",{
+        let data=await axios.get("https://red-awful-coral.cyclic.app/contact",{
             headers:{
                 Authorization:token
             }
@@ -43,7 +47,7 @@ export const get=(token)=>async(dispatch)=>{
 export const edit=(body,token,i,id,close)=>async(dispatch)=>{
     dispatch({type:LOADING})
     try {
-        let data=await axios.patch(`http://localhost:5000/contact/${id}`,body,{
+        let data=await axios.patch(`https://red-awful-coral.cyclic.app/contact/${id}`,body,{
             headers:{
                 Authorization:token
             }
@@ -60,7 +64,7 @@ export const edit=(body,token,i,id,close)=>async(dispatch)=>{
 export const add=(body,token,close)=>async(dispatch)=>{
     dispatch({type:LOADING})
     try {
-        let data=await axios.post(`http://localhost:5000/contact/`,body,{
+        let data=await axios.post(`https://red-awful-coral.cyclic.app/contact/`,body,{
             headers:{
                 Authorization:token
             }
@@ -77,7 +81,7 @@ export const add=(body,token,close)=>async(dispatch)=>{
 export const deletee=(id,token)=>async(dispatch)=>{
     dispatch({type:LOADING})
     try {
-        let data=await axios.delete(`http://localhost:5000/contact/${id}`,{
+        let data=await axios.delete(`https://red-awful-coral.cyclic.app/contact/${id}`,{
             headers:{
                 Authorization:token
             }

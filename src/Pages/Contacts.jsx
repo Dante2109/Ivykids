@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 
 import {
@@ -25,12 +25,13 @@ const Contacts = () => {
 
   return (
     <Box w="70%" m="auto" mt="50px">
+        <Heading as={"h1"}>Contact list</Heading>
         <Box alignSelf={"right"}>
             <ADD></ADD>
         </Box>
-      <TableContainer>
-  <Table variant='striped'>
-    <TableCaption>Imperial to metric conversion factors</TableCaption>
+        {data.length?<TableContainer>
+<Table variant='striped'>
+    <TableCaption>All the contacts that you have created are listed here</TableCaption>
     <Thead>
       <Tr>
         <Th>S.no</Th>
@@ -42,7 +43,7 @@ const Contacts = () => {
     </Thead>
     <Tbody> 
         {data.map((el,i)=>{
-            return(<TD name={el.name} number={el.number} i={i+1} id={el._id}></TD>)
+            return(<TD key={i} name={el.name} number={el.number} i={i+1} id={el._id}></TD>)
         })}
     </Tbody>
     <Tfoot>
@@ -50,7 +51,7 @@ const Contacts = () => {
       </Tr>
     </Tfoot>
   </Table>
-</TableContainer>
+</TableContainer>:<Heading>No Contacts!</Heading>}
     </Box>
     
   );
